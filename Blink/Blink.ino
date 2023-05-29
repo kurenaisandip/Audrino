@@ -1,16 +1,41 @@
-#include <dummy.h>
+
+/* Comment this out to disable prints and save space */
+#define BLYNK_PRINT Serial
+
+/* Fill in information from Blynk Device Info here */
+#define BLYNK_TEMPLATE_ID "TMPL6tHJGJq_M"
+#define BLYNK_TEMPLATE_NAME "New"
+#define BLYNK_AUTH_TOKEN "6vdFxBl0wVZJnB_ov2vdm5HOVXNwUYSC"
 
 
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(2, OUTPUT);
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+
+// Your WiFi credentials.
+// Set password to "" for open networks.
+char ssid[] = "Virinchi LAB";
+char pass[] = "tech&inovation";
+char auth[] = "E8-oQd1ai7GEBoDaV4MF5pVNJ43IJO6c";
+
+
+int relay1 = 2;  //D6 pin changed from 12 to 2 
+BLYNK_WRITE(V0) {
+  int led1 = param.asInt();
+  digitalWrite(relay1, led1);
+  Serial.println(led1);
 }
 
-// the loop function runs over and over again forever
+
+void setup() {
+  // Debug console
+  Serial.begin(9600);
+  pinMode(relay1, OUTPUT);
+
+  digitalWrite(relay1, LOW);
+ 
+  Blynk.begin(auth, ssid, pass);
+}
+
 void loop() {
-  digitalWrite(2, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(50);                       // wait for a second
-  digitalWrite(2, LOW);    // turn the LED off by making the voltage LOW
-  delay(50);                       // wait for a second
+  Blynk.run();
 }

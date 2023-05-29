@@ -15,30 +15,24 @@
 // Set password to "" for open networks.
 char ssid[] = "Virinchi LAB";
 char pass[] = "tech&inovation";
-char auth[] = "E8-oQd1ai7GEBoDaV4MF5pVNJ43IJO6c";
+char auth[] = "6vdFxBl0wVZJnB_ov2vdm5HOVXNwUYSC";
 
 
 int relay1 = 2;  //D6 pin changed from 12 to 2 
 BLYNK_WRITE(V0) {
   int led1 = param.asInt();
   digitalWrite(relay1, led1);
-  // Serial.println(led1);
+  Serial.println(led1);
 }
 
-// int relay2 = 2;  //D4 pin
-// BLYNK_WRITE(V1) {
-//   int led2 = param.asInt();
-//   digitalWrite(relay2, led2);
-//   Serial.println(led2);
-// }
 
 void setup() {
   // Debug console
   Serial.begin(9600);
   pinMode(relay1, OUTPUT);
-  // pinMode(relay2, OUTPUT);
+
   digitalWrite(relay1, LOW);
-  // digitalWrite(relay2, LOW);
+ 
   Blynk.begin(auth, ssid, pass);
 }
 
